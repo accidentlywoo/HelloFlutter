@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HelloPage('Maeve Gang King')
-    );
+        home: HelloPage('Maeve Gang King'));
   }
 }
 
-class HelloPage extends StatefulWidget { // Statefull 상태 변경 가능
+class HelloPage extends StatefulWidget {
+  // Statefull 상태 변경 가능
   final String title;
 
   HelloPage(this.title);
@@ -28,13 +28,35 @@ class HelloPage extends StatefulWidget { // Statefull 상태 변경 가능
 }
 
 class _HelloPageState extends State<HelloPage> {
+  String _message = '먹이를 주시오.';
+  int _counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: _changeMessage,
+        ),
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Text(widget.title, style: TextStyle(fontSize: 30)));
+        body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                // Text(widget.title, style: TextStyle(fontSize: 30)),
+                Text(_message, style: TextStyle(fontSize: 30)),
+                Text('$_counter', style: TextStyle(fontSize: 30))
+              ],
+            )
+
+        ));
+  }
+
+  void _changeMessage() {
+    setState(() {
+      _counter++;
+    });
   }
 }
-
